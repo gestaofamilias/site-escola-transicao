@@ -131,7 +131,7 @@ export default function HomePage() {
           <SectionTitle title={projects.title} />
           <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {projects.items.map((item) => (
-              <ProjectCard key={item.title} icon={item.icon} title={item.title} description={item.description} />
+              <ProjectCard key={item.title} icon={item.icon} title={item.title} description={item.description} image={item.image} />
             ))}
           </StaggerGroup>
           <FadeIn className="mt-10 flex justify-center">

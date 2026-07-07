@@ -56,12 +56,12 @@ export const homeContent = {
   projects: {
     title: "Experiências que tornam a aprendizagem mais viva",
     items: [
-      { icon: BookOpen, title: "Leitura", description: "Histórias que despertam imaginação e linguagem." },
-      { icon: Music, title: "Musicalização", description: "Ritmo, sons e expressão musical." },
-      { icon: Activity, title: "Atividades motoras", description: "Movimento, equilíbrio e coordenação." },
-      { icon: Wind, title: "Experiências sensoriais", description: "Texturas, cheiros e descobertas." },
-      { icon: Palette, title: "Arte e criatividade", description: "Expressão livre e criação." },
-      { icon: HeartHandshake, title: "Educação socioemocional", description: "Emoções, escuta e convivência." },
+      { icon: BookOpen, title: "Leitura", description: "Histórias que despertam imaginação e linguagem.", image: "[INSERIR_FOTO_LEITURA]" },
+      { icon: Music, title: "Musicalização", description: "Ritmo, sons e expressão musical.", image: "[INSERIR_FOTO_MUSICALIZACAO]" },
+      { icon: Activity, title: "Atividades motoras", description: "Movimento, equilíbrio e coordenação.", image: "[INSERIR_FOTO_ATIVIDADES_MOTORAS]" },
+      { icon: Wind, title: "Experiências sensoriais", description: "Texturas, cheiros e descobertas.", image: "[INSERIR_FOTO_EXPERIENCIA_SENSORIAL]" },
+      { icon: Palette, title: "Arte e criatividade", description: "Expressão livre e criação.", image: "[INSERIR_FOTO_ARTE_CRIATIVIDADE]" },
+      { icon: HeartHandshake, title: "Educação socioemocional", description: "Emoções, escuta e convivência.", image: "[INSERIR_FOTO_SOCIOEMOCIONAL]" },
     ],
   },
   impactPhrase: {
