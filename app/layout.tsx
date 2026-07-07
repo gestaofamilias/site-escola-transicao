@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { siteUrl } from "@/lib/site-config";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -17,13 +18,39 @@ const nunito = Nunito({
   weight: ["400", "500", "600", "700"],
 });
 
+const defaultTitle = "Escola Transição | Educação Infantil com Acolhimento e Neurociência";
+const defaultDescription =
+  "Conheça a Escola Transição, uma escola de educação infantil que une acolhimento, neurociência, experiências significativas e desenvolvimento integral.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Escola Transição | Educação Infantil com Acolhimento e Neurociência",
+    default: defaultTitle,
     template: "%s | Escola Transição",
   },
-  description:
-    "Conheça a Escola Transição, uma escola de educação infantil que une acolhimento, neurociência, experiências significativas e desenvolvimento integral.",
+  description: defaultDescription,
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: siteUrl,
+    siteName: "Escola Transição",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [
+      {
+        url: "/images/hero.png",
+        width: 1164,
+        height: 1351,
+        alt: "Professora e crianças da Escola Transição em atividade pedagógica",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: ["/images/hero.png"],
+  },
 };
 
 export default function RootLayout({
