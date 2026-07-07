@@ -1,3 +1,9 @@
+// LGPD: nenhuma foto com criança identificável pode ser publicada aqui sem
+// autorização de uso de imagem assinada pelos pais/responsáveis legais.
+// As legendas ("caption") não devem conter o nome completo de nenhuma
+// criança. Veja a política em /privacidade (seção "Imagens de crianças na
+// Galeria") para o procedimento de solicitação de remoção de uma foto.
+
 export type GalleryCategory = "Estrutura" | "Atividades" | "Projetos" | "Equipe" | "Momentos especiais";
 
 export type GalleryImage = {
