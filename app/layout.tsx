@@ -4,7 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
-import { siteUrl } from "@/lib/site-config";
+import { siteConfig, siteUrl } from "@/lib/site-config";
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
@@ -53,6 +53,24 @@ export const metadata: Metadata = {
   },
 };
 
+// Dados estruturados Schema.org. Os campos de contato ainda vêm de
+// siteConfig como placeholders [INSERIR_...] até serem preenchidos.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  name: siteConfig.name,
+  description: siteConfig.tagline,
+  url: siteUrl,
+  telephone: siteConfig.phone,
+  email: siteConfig.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: siteConfig.address,
+  },
+  openingHours: siteConfig.hours,
+  sameAs: [siteConfig.instagram],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -61,6 +79,10 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${quicksand.variable} ${nunito.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
