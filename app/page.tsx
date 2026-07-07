@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { PillarCard } from "@/components/ui/PillarCard";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
+import { AutoScrollRow } from "@/components/ui/AutoScrollRow";
 import { FadeIn, StaggerGroup, StaggerItem } from "@/components/ui/FadeIn";
 import { NeuralBackground } from "@/components/ui/NeuralBackground";
 import { homeContent } from "@/data/home";
@@ -88,31 +89,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section overflow-hidden">
         <div className="container-page">
           <SectionTitle title={structure.title} />
-          <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {structure.items.map((item) => (
-              <StaggerItem key={item.label}>
-                <div className="flex flex-col gap-3">
-                  {item.photo ? (
-                    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-brand-deep/10 shadow-[0_8px_30px_-20px_rgba(10,63,209,0.45)]">
-                      <Image
-                        src={item.photo}
-                        alt={item.label}
-                        fill
-                        sizes="(min-width: 1024px) 280px, 45vw"
-                        className="object-cover"
-                      />
-                    </div>
-                  ) : (
-                    <PlaceholderImage label={item.image} aspect="aspect-[4/5]" />
-                  )}
-                  <p className="text-center font-heading text-sm font-semibold text-brand-deep-dark">{item.label}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
+        </div>
+        <div className="mt-12">
+          <AutoScrollRow
+            items={structure.items}
+            itemKey={(item) => item.label}
+            renderItem={(item) => (
+              <div className="flex w-[220px] flex-col gap-3 sm:w-[260px]">
+                {item.photo ? (
+                  <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-brand-deep/10 shadow-[0_8px_30px_-20px_rgba(10,63,209,0.45)]">
+                    <Image
+                      src={item.photo}
+                      alt={item.label}
+                      fill
+                      sizes="260px"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <PlaceholderImage label={item.image} aspect="aspect-[4/5]" />
+                )}
+                <p className="text-center font-heading text-sm font-semibold text-brand-deep-dark">{item.label}</p>
+              </div>
+            )}
+          />
+        </div>
+        <div className="container-page">
           <FadeIn className="mt-10 flex justify-center">
             <Button href="/estrutura" variant="secondary" showArrow>
               Ver estrutura completa
