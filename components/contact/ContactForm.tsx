@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { Send, CheckCircle2 } from "lucide-react";
 
 export function ContactForm() {
@@ -88,6 +89,14 @@ export function ContactForm() {
         Enviar mensagem
         <Send className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </button>
+
+      <p className="mt-4 text-xs leading-relaxed text-ink-soft">
+        Seus dados serão usados apenas para responder seu contato. Veja nossa{" "}
+        <Link href="/privacidade" className="focus-ring underline underline-offset-2 hover:text-brand-blue">
+          Política de Privacidade
+        </Link>
+        .
+      </p>
     </form>
   );
 }
