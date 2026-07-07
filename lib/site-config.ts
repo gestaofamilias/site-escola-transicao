@@ -42,4 +42,5 @@ export const footerNav: NavItem[] = [
   ...mainNav.filter((item) => item.href !== "/"),
   { label: "Rotina Escolar", href: "/rotina" },
   { label: "Equipe", href: "/equipe" },
+  { label: "Política de Privacidade", href: "/privacidade" },
 ];
