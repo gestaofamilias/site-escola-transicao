@@ -1,6 +1,11 @@
 // Dados institucionais centralizados. Substitua os placeholders [INSERIR_...]
 // pelos dados reais da escola quando estiverem disponíveis.
 
+// URL pública do site em produção. Defina a variável de ambiente
+// NEXT_PUBLIC_SITE_URL (ex: https://escolatransicao.com.br) quando o
+// domínio definitivo estiver disponível; até lá, fica um placeholder.
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://[INSERIR_DOMINIO_DO_SITE]";
+
 export const siteConfig = {
   name: "Escola Transição",
   tagline: "Acolhimento, neurociência e desenvolvimento integral na educação infantil.",
