@@ -8,7 +8,10 @@ export function ContactForm() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Formulário preparado para integração futura (API, e-mail ou CRM).
+    // Envio ainda não integrado a um backend real (ex: Resend, Formspree).
+    // Ao integrar, é obrigatório: validação server-side dos campos, honeypot
+    // ou captcha antibot, rate limiting por IP, e nunca expor chave de API
+    // no client — a chamada deve partir de uma Route Handler/Server Action.
     setSubmitted(true);
   }
 
