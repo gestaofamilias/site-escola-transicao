@@ -4,7 +4,7 @@
 // URL pública do site em produção. Defina a variável de ambiente
 // NEXT_PUBLIC_SITE_URL (ex: https://escolatransicao.com.br) quando o
 // domínio definitivo estiver disponível; até lá, fica um placeholder.
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://[INSERIR_DOMINIO_DO_SITE]";
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://INSERIR-DOMINIO-DO-SITE.com.br";
 
 export const siteConfig = {
   name: "Escola Transição",
