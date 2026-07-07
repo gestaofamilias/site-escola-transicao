@@ -78,7 +78,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className={`${quicksand.variable} ${nunito.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
+      {/* suppressHydrationWarning: extensões de navegador (ex: ColorZilla)
+          injetam atributos como cz-shortcut-listen no <body> antes da
+          hidratação do React, gerando um falso positivo de mismatch. */}
+      <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
