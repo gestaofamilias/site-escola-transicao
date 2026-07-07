@@ -8,7 +8,7 @@ export const contatoContent = {
     subtitle: "Estamos à disposição para apresentar nossa escola, proposta e rotina.",
   },
   cards: [
-    { icon: MessageCircle, label: "WhatsApp", value: siteConfig.whatsappNumber },
+    { icon: MessageCircle, label: "WhatsApp", value: siteConfig.whatsappDisplay },
     { icon: Phone, label: "Telefone", value: siteConfig.phone },
     { icon: InstagramIcon, label: "Instagram", value: siteConfig.instagram },
     { icon: Mail, label: "E-mail", value: siteConfig.email },

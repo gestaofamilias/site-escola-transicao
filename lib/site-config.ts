@@ -9,15 +9,18 @@ export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://INSERIR-DOMI
 export const siteConfig = {
   name: "Escola Transição",
   tagline: "Acolhimento, neurociência e desenvolvimento integral na educação infantil.",
-  whatsappNumber: "[INSERIR_NUMERO_WHATSAPP]", // apenas dígitos, com DDI. Ex: 5511999999999
+  // Assumindo que o WhatsApp usa o mesmo número de telefone do Google Maps
+  // (41 3586-0107) — confirme se a escola usa outro número para o WhatsApp.
+  whatsappNumber: "554135860107", // apenas dígitos, com DDI. Ex: 5511999999999
+  whatsappDisplay: "+55 (41) 3586-0107", // versão formatada, só para exibição
   whatsappDefaultMessage:
     "Olá! Vim pelo site da Escola Transição e gostaria de conhecer melhor a escola.",
-  phone: "[INSERIR_TELEFONE]",
+  phone: "(41) 3586-0107",
   email: "[INSERIR_EMAIL]",
-  instagram: "[INSERIR_INSTAGRAM]",
-  address: "[INSERIR_ENDERECO]",
-  hours: "[INSERIR_HORARIO]",
-  googleMapsLink: "[INSERIR_LINK_GOOGLE_MAPS]",
+  instagram: "@escola_transicao",
+  address: "R. João Zarpelon, 124 - Costeira, São José dos Pinhais - PR, 83015-210",
+  hours: "[INSERIR_HORARIO]", // confirmado apenas: fecha às 18h. Falta horário de abertura e dias da semana.
+  googleMapsLink: "https://www.google.com/maps/search/?api=1&query=R.+Jo%C3%A3o+Zarpelon%2C+124+-+Costeira%2C+S%C3%A3o+Jos%C3%A9+dos+Pinhais+-+PR%2C+83015-210",
   googleMapsEmbedSrc: "[INSERIR_IFRAME_GOOGLE_MAPS]",
 } as const;
 
