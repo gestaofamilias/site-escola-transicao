@@ -12,6 +12,7 @@ export function MapEmbed() {
         className="h-full min-h-[320px] w-full rounded-3xl border-0"
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
+        sandbox="allow-scripts allow-same-origin allow-popups"
       />
     );
   }
