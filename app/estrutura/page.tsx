@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { StaggerGroup, StaggerItem } from "@/components/ui/FadeIn";
 import { ImageGrid } from "@/components/gallery/ImageGrid";
 import { estruturaContent } from "@/data/estrutura";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Estrutura da Escola Transição",
+export const metadata = pageMetadata({
+  title: "Estrutura",
   description: "Conheça os ambientes da Escola Transição, preparados para acolher, cuidar, brincar e aprender.",
-};
+  path: "/estrutura",
+});
 
 export default function EstruturaPage() {
   const { hero, intro, spaces, seguranca, galeria } = estruturaContent;

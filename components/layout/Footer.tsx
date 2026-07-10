@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
-import { buildWhatsAppLink, footerNav, siteConfig } from "@/lib/site-config";
+import { buildWhatsAppLink, footerNav, isPlaceholder, siteConfig } from "@/lib/site-config";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -46,15 +46,28 @@ export function Footer() {
             </li>
             <li className="flex items-start gap-2.5">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue-light" />
-              <span>{siteConfig.phone}</span>
+              <a href={`tel:${siteConfig.phoneE164}`} className="focus-ring rounded hover:text-white">
+                {siteConfig.phone}
+              </a>
             </li>
-            <li className="flex items-start gap-2.5">
-              <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue-light" />
-              <span className="break-all">{siteConfig.email}</span>
-            </li>
+            {!isPlaceholder(siteConfig.email) && (
+              <li className="flex items-start gap-2.5">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue-light" />
+                <a href={`mailto:${siteConfig.email}`} className="focus-ring rounded break-all hover:text-white">
+                  {siteConfig.email}
+                </a>
+              </li>
+            )}
             <li className="flex items-start gap-2.5">
               <InstagramIcon className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue-light" />
-              <span>{siteConfig.instagram}</span>
+              <a
+                href={siteConfig.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring rounded hover:text-white"
+              >
+                {siteConfig.instagram}
+              </a>
             </li>
           </ul>
         </div>
@@ -66,12 +79,21 @@ export function Footer() {
           <ul className="mt-4 flex flex-col gap-3 text-sm">
             <li className="flex items-start gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue-light" />
-              <span>{siteConfig.address}</span>
+              <a
+                href={siteConfig.googleMapsLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring rounded hover:text-white"
+              >
+                {siteConfig.address}
+              </a>
             </li>
-            <li className="flex items-start gap-2.5">
-              <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue-light" />
-              <span>{siteConfig.hours}</span>
-            </li>
+            {!isPlaceholder(siteConfig.hours) && (
+              <li className="flex items-start gap-2.5">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-brand-blue-light" />
+                <span>{siteConfig.hours}</span>
+              </li>
+            )}
           </ul>
         </div>
       </div>

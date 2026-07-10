@@ -15,10 +15,13 @@ const routes = [
   "/privacidade",
 ];
 
+// Sem lastModified: não temos um CMS ou histórico real de alteração por
+// página, e usar a data de cada build para todas as rotas é enganoso para
+// os buscadores (parece que tudo mudou, mesmo quando nada mudou). Melhor
+// omitir o campo do que inventar uma data.
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((route) => ({
     url: `${siteUrl}${route}`,
-    lastModified: new Date(),
     changeFrequency: "monthly",
     priority: route === "" ? 1 : 0.7,
   }));

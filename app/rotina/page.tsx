@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Timeline } from "@/components/ui/Timeline";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { rotinaContent } from "@/data/rotina";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Rotina Escolar | Escola Transição",
+export const metadata = pageMetadata({
+  title: "Rotina Escolar",
   description: "Veja como a rotina da Escola Transição acolhe, organiza e favorece o desenvolvimento infantil.",
-};
+  path: "/rotina",
+});
 
 export default function RotinaPage() {
   const { hero, importancia, momentos, intencionalidade, adaptacao, familias } = rotinaContent;

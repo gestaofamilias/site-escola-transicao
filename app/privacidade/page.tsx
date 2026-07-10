@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Mail } from "lucide-react";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -8,12 +7,14 @@ import {
   privacyDpoName,
   privacyLastUpdated,
 } from "@/data/privacidade";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Política de Privacidade | Escola Transição",
+export const metadata = pageMetadata({
+  title: "Política de Privacidade",
   description:
     "Saiba como a Escola Transição coleta, usa e protege dados pessoais e imagens de crianças, em conformidade com a LGPD.",
-};
+  path: "/privacidade",
+});
 
 export default function PrivacidadePage() {
   const { hero, intro, sections, contactTitle, contactText } = privacidadeContent;

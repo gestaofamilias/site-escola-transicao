@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Button } from "@/components/ui/Button";
@@ -9,11 +8,14 @@ import { FadeIn, StaggerGroup } from "@/components/ui/FadeIn";
 import { MessageCircle, MapIcon } from "lucide-react";
 import { buildWhatsAppLink, siteConfig } from "@/lib/site-config";
 import { contatoContent } from "@/data/contato";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contato | Escola Transição",
-  description: "Entre em contato com a Escola Transição e conheça nossa proposta, estrutura e rotina.",
-};
+export const metadata = pageMetadata({
+  title: "Contato",
+  description:
+    "Fale com a Escola Transição, no bairro Costeira em São José dos Pinhais (PR), e conheça nossa proposta, estrutura e rotina.",
+  path: "/contato",
+});
 
 export default function ContatoPage() {
   const { hero, cards, finalPhrase } = contatoContent;
@@ -41,7 +43,7 @@ export default function ContatoPage() {
         <div className="container-page">
           <StaggerGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {cards.map((card) => (
-              <ContactCard key={card.label} icon={card.icon} label={card.label} value={card.value} />
+              <ContactCard key={card.label} icon={card.icon} label={card.label} value={card.value} href={card.href} />
             ))}
           </StaggerGroup>
         </div>

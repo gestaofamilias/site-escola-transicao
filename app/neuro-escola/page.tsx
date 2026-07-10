@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Timeline } from "@/components/ui/Timeline";
 import { FadeIn, StaggerGroup, StaggerItem } from "@/components/ui/FadeIn";
 import { NeuralBackground } from "@/components/ui/NeuralBackground";
 import { neuroEscolaContent } from "@/data/neuroEscola";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Neuro-Escola | Neurociência Aplicada à Educação Infantil",
+export const metadata = pageMetadata({
+  title: "Neuro-Escola: Neurociência Aplicada à Educação Infantil",
   description:
     "Entenda como a Escola Transição aplica neurociência, afeto e experiências no desenvolvimento infantil.",
-};
+  path: "/neuro-escola",
+});
 
 export default function NeuroEscolaPage() {
   const { hero, oQueE, comoAprende, comoAplicamos, conexoes, afeto, finalPhrase } = neuroEscolaContent;

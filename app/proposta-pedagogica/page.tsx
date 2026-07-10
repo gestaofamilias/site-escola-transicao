@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { PillarCard } from "@/components/ui/PillarCard";
 import { FadeIn, StaggerGroup, StaggerItem } from "@/components/ui/FadeIn";
 import { propostaContent } from "@/data/propostaPedagogica";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Proposta Pedagógica | Escola Transição",
+export const metadata = pageMetadata({
+  title: "Proposta Pedagógica",
   description:
     "Conheça o método de ensino da Escola Transição, baseado no desenvolvimento motor, cognitivo, social, afetivo e sensorial.",
-};
+  path: "/proposta-pedagogica",
+});
 
 export default function PropostaPedagogicaPage() {
   const { hero, proposta, integral, pilares, significado, diaADia, finalPhrase } = propostaContent;

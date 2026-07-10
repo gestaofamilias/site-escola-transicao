@@ -15,6 +15,9 @@ const tones: Record<NonNullable<PlaceholderImageProps["tone"]>, string> = {
   yellow: "from-accent-yellow-soft via-brand-sky to-accent-yellow-soft/70",
 };
 
+// `label` (ex: "[INSERIR_FOTO_SALA_1]") é só um identificador interno para
+// saber qual foto falta — nunca é mostrado como texto visível ao público.
+// Em vez disso, a pessoa vê uma mensagem neutra de "foto em preparação".
 export function PlaceholderImage({
   label,
   className = "",
@@ -28,6 +31,9 @@ export function PlaceholderImage({
 
   return (
     <div
+      data-placeholder-id={label}
+      role="img"
+      aria-label="Foto em preparação"
       className={`relative flex ${aspect} w-full items-center justify-center overflow-hidden rounded-3xl border border-brand-deep/10 bg-gradient-to-br shadow-[0_8px_30px_-20px_rgba(10,63,209,0.45)] ${tones[tone]} ${className}`}
       style={style}
     >
@@ -37,7 +43,7 @@ export function PlaceholderImage({
         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-white/70 text-brand-blue shadow-sm">
           <Camera className="h-5 w-5" strokeWidth={1.75} />
         </span>
-        <span className="font-mono text-[11px] leading-snug text-brand-deep/70">{label}</span>
+        <span className="text-xs font-medium leading-snug text-brand-deep/70">Foto em preparação</span>
       </div>
     </div>
   );

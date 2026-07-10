@@ -1,18 +1,27 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { TeamCard } from "@/components/ui/TeamCard";
 import { FadeIn, StaggerGroup, StaggerItem } from "@/components/ui/FadeIn";
 import { equipeContent } from "@/data/equipe";
+import { pageMetadata } from "@/lib/seo";
+import { isPlaceholder } from "@/lib/site-config";
 
-export const metadata: Metadata = {
-  title: "Equipe | Escola Transição",
+export const metadata = pageMetadata({
+  title: "Equipe",
   description: "Conheça a equipe da Escola Transição, profissionais que cuidam, ensinam e acompanham cada criança.",
-};
+  path: "/equipe",
+});
 
 export default function EquipePage() {
   const { hero, intro, direcao, profissionais, olhar, finalPhrase } = equipeContent;
+
+  // Nomes, fotos e descrições individuais da equipe ainda não foram
+  // confirmados pela escola — nunca inventamos essas informações. Em vez de
+  // mostrar placeholders [INSERIR_...] ou texto genérico fingindo ser real,
+  // essas seções ficam ocultas até os dados reais chegarem.
+  const direcaoConfirmada = !isPlaceholder(direcao.name);
+  const profissionaisConfirmados = profissionais.filter((pessoa) => !isPlaceholder(pessoa.name));
 
   return (
     <>
@@ -24,35 +33,43 @@ export default function EquipePage() {
         </div>
       </section>
 
-      <section className="section bg-brand-sky/40">
-        <div className="container-page grid items-center gap-10 lg:grid-cols-[minmax(0,320px)_1fr]">
-          <FadeIn>
-            <PlaceholderImage label={direcao.image} aspect="aspect-square" tone="deep" className="mx-auto max-w-xs lg:max-w-none" />
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue">{direcao.role}</p>
-            <h2 className="mt-2 font-heading text-2xl font-semibold text-brand-deep-dark sm:text-3xl">
-              {direcao.name}
-            </h2>
-            <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">{direcao.text}</p>
-          </FadeIn>
-        </div>
-      </section>
+      {direcaoConfirmada && (
+        <section className="section bg-brand-sky/40">
+          <div className="container-page grid items-center gap-10 lg:grid-cols-[minmax(0,320px)_1fr]">
+            <FadeIn>
+              <PlaceholderImage label={direcao.image} aspect="aspect-square" tone="deep" className="mx-auto max-w-xs lg:max-w-none" />
+            </FadeIn>
+            <FadeIn delay={0.1}>
+              <p className="text-xs font-semibold uppercase tracking-wide text-brand-blue">{direcao.role}</p>
+              <h2 className="mt-2 font-heading text-2xl font-semibold text-brand-deep-dark sm:text-3xl">
+                {direcao.name}
+              </h2>
+              <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">{direcao.text}</p>
+            </FadeIn>
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="container-page">
           <SectionTitle title="Professoras e equipe pedagógica" />
-          <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {profissionais.map((pessoa) => (
-              <TeamCard
-                key={pessoa.name}
-                name={pessoa.name}
-                role={pessoa.role}
-                description={pessoa.description}
-                image={pessoa.image}
-              />
-            ))}
-          </StaggerGroup>
+          {profissionaisConfirmados.length > 0 ? (
+            <StaggerGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {profissionaisConfirmados.map((pessoa) => (
+                <TeamCard
+                  key={pessoa.name}
+                  name={pessoa.name}
+                  role={pessoa.role}
+                  description={pessoa.description}
+                  image={pessoa.image}
+                />
+              ))}
+            </StaggerGroup>
+          ) : (
+            <p className="mt-8 text-center text-ink-soft">
+              Em breve, apresentaremos aqui cada integrante da equipe pedagógica.
+            </p>
+          )}
         </div>
       </section>
 

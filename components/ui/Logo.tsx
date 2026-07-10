@@ -16,7 +16,8 @@ export function Logo({ className = "", light = false }: { className?: string; li
         alt="Escola Transição — Cada criança, um jeito único de aprender"
         width={612}
         height={408}
-        priority
+        // Não é a imagem LCP de nenhuma página (é pequena e sempre
+        // acompanhada por um título maior), então não usa preload.
         className={`h-14 w-auto transition-transform duration-300 group-hover:scale-105 sm:h-16 ${
           light ? "brightness-0 invert" : ""
         }`}

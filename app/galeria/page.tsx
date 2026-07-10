@@ -1,13 +1,14 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { FilterableGallery } from "@/components/gallery/FilterableGallery";
 import { galeriaContent } from "@/data/galeria";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Galeria | Escola Transição",
+export const metadata = pageMetadata({
+  title: "Galeria",
   description: "Veja fotos dos ambientes, projetos, atividades e momentos da Escola Transição.",
-};
+  path: "/galeria",
+});
 
 export default function GaleriaPage() {
   const { hero, intro, filters, images } = galeriaContent;

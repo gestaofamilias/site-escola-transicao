@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants, type HTMLMotionProps } from "framer-motion";
 import type { ReactNode } from "react";
 
 type FadeInProps = {
@@ -19,6 +19,11 @@ const distances = {
   none: { y: 0, x: 0 },
 };
 
+// data-motion-reveal + o <noscript><style> em app/layout.tsx garantem que,
+// se o JavaScript falhar ou estiver desabilitado, este conteúdo nunca fique
+// preso em opacity:0 — o CSS de fallback força visibilidade total.
+// A animação em si (transform/x/y) já respeita prefers-reduced-motion via
+// <MotionConfig reducedMotion="user"> no layout raiz.
 export function FadeIn({ children, className, delay = 0, direction = "up" }: FadeInProps) {
   const { x, y } = distances[direction];
 
@@ -34,6 +39,7 @@ export function FadeIn({ children, className, delay = 0, direction = "up" }: Fad
 
   return (
     <motion.div
+      data-motion-reveal
       className={className}
       initial="hidden"
       whileInView="visible"
@@ -45,13 +51,13 @@ export function FadeIn({ children, className, delay = 0, direction = "up" }: Fad
   );
 }
 
-type StaggerProps = {
+type StaggerProps = HTMLMotionProps<"div"> & {
   children: ReactNode;
   className?: string;
   stagger?: number;
 };
 
-export function StaggerGroup({ children, className, stagger = 0.12 }: StaggerProps) {
+export function StaggerGroup({ children, className, stagger = 0.12, ...rest }: StaggerProps) {
   const variants: Variants = {
     hidden: {},
     visible: {
@@ -61,11 +67,13 @@ export function StaggerGroup({ children, className, stagger = 0.12 }: StaggerPro
 
   return (
     <motion.div
+      data-motion-reveal
       className={className}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
       variants={variants}
+      {...rest}
     >
       {children}
     </motion.div>
@@ -79,7 +87,7 @@ export function StaggerItem({ children, className }: { children: ReactNode; clas
   };
 
   return (
-    <motion.div className={className} variants={variants}>
+    <motion.div data-motion-reveal className={className} variants={variants}>
       {children}
     </motion.div>
   );

@@ -4,9 +4,12 @@ import {
   Brain,
   Heart,
   HeartHandshake,
+  MapPin,
+  MessageCircle,
   Music,
   Palette,
   Puzzle,
+  ShieldCheck,
   Sparkles,
   Users,
   Wind,
@@ -27,6 +30,12 @@ export const homeContent = {
       { icon: Heart, label: "Cuidado individual" },
     ],
   },
+  diferenciais: [
+    { icon: HeartHandshake, title: "Acompanhamento individual", description: "Cada criança é observada e acompanhada no seu próprio ritmo de desenvolvimento." },
+    { icon: Brain, title: "Neurociência aplicada", description: "A rotina e as atividades são pensadas com base em como o cérebro infantil aprende." },
+    { icon: ShieldCheck, title: "Ambientes seguros", description: "Espaços organizados para acolher, proteger e estimular a autonomia das crianças." },
+    { icon: Users, title: "Parceria com as famílias", description: "Comunicação próxima para acompanhar de perto o desenvolvimento de cada criança." },
+  ],
   intro: {
     title: "Uma escola pensada para cada fase da infância",
     text: "A Escola Transição nasceu com o propósito de oferecer uma educação infantil mais humana, acolhedora e conectada ao desenvolvimento real de cada criança. Aqui, aprender envolve brincar, sentir, conviver, experimentar, se movimentar e criar vínculos.",
@@ -48,28 +57,62 @@ export const homeContent = {
     title: "Ambientes preparados para acolher, brincar e aprender",
     items: [
       { image: "[INSERIR_FOTO_SALA_1]", label: "Salas acolhedoras" },
-      { image: "[INSERIR_FOTO_PATIO]", photo: "/images/estrutura-quintal.png", label: "Espaços de convivência" },
-      { image: "[INSERIR_FOTO_AMBIENTE_SENSORIAL]", photo: "/images/estrutura-entrada.png", label: "Ambientes seguros" },
-      { image: "[INSERIR_FOTO_ATIVIDADE]", photo: "/images/estrutura-parquinho.png", label: "Espaços para experiências" },
+      { image: "[INSERIR_FOTO_PATIO]", photo: "/images/estrutura-quintal.webp", label: "Espaços de convivência" },
+      { image: "[INSERIR_FOTO_AMBIENTE_SENSORIAL]", photo: "/images/estrutura-entrada.webp", label: "Ambientes seguros" },
+      { image: "[INSERIR_FOTO_ATIVIDADE]", photo: "/images/estrutura-parquinho.webp", label: "Espaços para experiências" },
     ],
   },
   projects: {
     title: "Experiências que tornam a aprendizagem mais viva",
     items: [
-      { icon: BookOpen, title: "Leitura", description: "Histórias que despertam imaginação e linguagem.", image: "[INSERIR_FOTO_LEITURA]" },
-      { icon: Music, title: "Musicalização", description: "Ritmo, sons e expressão musical.", image: "[INSERIR_FOTO_MUSICALIZACAO]" },
-      { icon: Activity, title: "Atividades motoras", description: "Movimento, equilíbrio e coordenação.", image: "[INSERIR_FOTO_ATIVIDADES_MOTORAS]" },
-      { icon: Wind, title: "Experiências sensoriais", description: "Texturas, cheiros e descobertas.", image: "[INSERIR_FOTO_EXPERIENCIA_SENSORIAL]" },
-      { icon: Palette, title: "Arte e criatividade", description: "Expressão livre e criação.", image: "[INSERIR_FOTO_ARTE_CRIATIVIDADE]" },
-      { icon: HeartHandshake, title: "Educação socioemocional", description: "Emoções, escuta e convivência.", image: "[INSERIR_FOTO_SOCIOEMOCIONAL]" },
+      { icon: BookOpen, title: "Leitura", description: "Histórias que despertam imaginação e linguagem.", image: "[INSERIR_FOTO_LEITURA]", photo: "/images/projeto-leitura.webp" },
+      { icon: Music, title: "Musicalização", description: "Ritmo, sons e expressão musical.", image: "[INSERIR_FOTO_MUSICALIZACAO]", photo: "/images/projeto-musicalizacao.webp" },
+      { icon: Activity, title: "Atividades motoras", description: "Movimento, equilíbrio e coordenação.", image: "[INSERIR_FOTO_ATIVIDADES_MOTORAS]", photo: "/images/projeto-atividades-motoras.webp" },
+      { icon: Wind, title: "Experiências sensoriais", description: "Texturas, cheiros e descobertas.", image: "[INSERIR_FOTO_EXPERIENCIA_SENSORIAL]", photo: "/images/projeto-experiencias-sensoriais.webp" },
+      { icon: Palette, title: "Arte e criatividade", description: "Expressão livre e criação.", image: "[INSERIR_FOTO_ARTE_CRIATIVIDADE]", photo: "/images/projeto-arte-criatividade.webp" },
+      { icon: HeartHandshake, title: "Educação socioemocional", description: "Emoções, escuta e convivência.", image: "[INSERIR_FOTO_SOCIOEMOCIONAL]", photo: "/images/projeto-educacao-socioemocional.webp" },
     ],
   },
   impactPhrase: {
     title: "Cada experiência cria conexões. Cada conexão transforma o futuro.",
     text: "Na Escola Transição, cada dia é uma oportunidade de aprender, se desenvolver e construir novas descobertas.",
   },
+  // Respostas baseadas apenas no que já está confirmado e publicado nas
+  // outras páginas do site (Neuro-Escola, Proposta Pedagógica, Rotina,
+  // Contato) — nenhum dado novo (horário, faixa etária, valores) inventado.
+  faq: [
+    {
+      icon: Brain,
+      question: "O que é a Neuro-Escola?",
+      answer:
+        "É a forma como aplicamos a neurociência na prática pedagógica: entendemos que o cérebro da criança aprende por meio de experiências, emoções, movimento e relações, e planejamos a rotina considerando isso.",
+    },
+    {
+      icon: HeartHandshake,
+      question: "Como funciona o acompanhamento individual das crianças?",
+      answer:
+        "Cada criança é observada e acompanhada de forma próxima, respeitando seu próprio ritmo nas áreas motora, cognitiva, social, afetiva e sensorial.",
+    },
+    {
+      icon: Sparkles,
+      question: "Como é a rotina na escola?",
+      answer:
+        "A rotina é pensada com intencionalidade, alternando acolhida, atividades pedagógicas, brincadeiras, alimentação e descanso, sempre respeitando o ritmo de cada criança.",
+    },
+    {
+      icon: MessageCircle,
+      question: "Como faço para conhecer a escola pessoalmente?",
+      answer:
+        "Você pode agendar uma visita diretamente pelo WhatsApp ou pelo formulário na página de Contato — teremos prazer em te receber.",
+    },
+    {
+      icon: MapPin,
+      question: "Onde fica a Escola Transição?",
+      answer: "Estamos no bairro Costeira, em São José dos Pinhais (PR).",
+    },
+  ],
   finalCta: {
-    title: "Conheça a Escola Transição",
-    text: "Explore nosso site e conheça nossa história, proposta pedagógica, estrutura, projetos e forma de cuidar da infância.",
+    title: "Conheça a Escola Transição de perto",
+    text: "Será um prazer receber sua família e apresentar nossa proposta, estrutura e rotina pessoalmente.",
   },
 };

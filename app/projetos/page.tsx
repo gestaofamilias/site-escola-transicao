@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { StaggerGroup, StaggerItem } from "@/components/ui/FadeIn";
 import { ImageGrid } from "@/components/gallery/ImageGrid";
 import { projetosContent } from "@/data/projetos";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Projetos e Vivências | Escola Transição",
+export const metadata = pageMetadata({
+  title: "Projetos e Vivências",
   description:
     "Conheça os projetos, atividades e vivências que tornam a aprendizagem mais significativa na Escola Transição.",
-};
+  path: "/projetos",
+});
 
 export default function ProjetosPage() {
   const { hero, aprenderVivendo, projects, beneficios, galeria } = projetosContent;
@@ -36,6 +37,7 @@ export default function ProjetosPage() {
                 title={project.title}
                 description={project.description}
                 image={project.image}
+                photo={project.photo}
               />
             ))}
           </StaggerGroup>

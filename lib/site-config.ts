@@ -1,10 +1,58 @@
 // Dados institucionais centralizados. Substitua os placeholders [INSERIR_...]
 // pelos dados reais da escola quando estiverem disponíveis.
 
-// URL pública do site em produção. Defina a variável de ambiente
-// NEXT_PUBLIC_SITE_URL (ex: https://escolatransicao.com.br) quando o
-// domínio definitivo estiver disponível; até lá, fica um placeholder.
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://INSERIR-DOMINIO-DO-SITE.com.br";
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+const isProduction = process.env.NODE_ENV === "production";
+const looksFake = (url: string) => /INSERIR|localhost|example\.com/i.test(url);
+
+function resolveSiteUrl(): string {
+  if (!isProduction) {
+    // Desenvolvimento: localhost é aceitável e esperado.
+    return rawSiteUrl && !looksFake(rawSiteUrl) ? rawSiteUrl.replace(/\/$/, "") : "http://localhost:3000";
+  }
+
+  if (rawSiteUrl && !looksFake(rawSiteUrl)) {
+    return rawSiteUrl.replace(/\/$/, "");
+  }
+
+  // Este módulo é importado por Client Components (Header, Footer,
+  // ContactForm...), então também é avaliado no bundle do navegador. Lá,
+  // variáveis sem prefixo NEXT_PUBLIC_ (como ALLOW_PLACEHOLDER_SITE_URL)
+  // não existem — reproduzir o throw ali quebraria a hidratação para
+  // todo mundo. A validação rígida só roda no servidor (build/SSR); se o
+  // build passou, o servidor já garantiu que está tudo certo.
+  if (typeof window !== "undefined") {
+    return "https://INSERIR-DOMINIO-DO-SITE.com.br";
+  }
+
+  if (process.env.ALLOW_PLACEHOLDER_SITE_URL) {
+    // Escape hatch só para builds de verificação/CI locais — nunca usar em
+    // um deploy real. Avisa alto no log em vez de falhar silenciosamente.
+    console.warn(
+      "[site-config] Build de produção rodando com domínio fictício porque ALLOW_PLACEHOLDER_SITE_URL " +
+        "está definida. NÃO publique este build. Defina NEXT_PUBLIC_SITE_URL com o domínio real antes do deploy."
+    );
+    return "https://INSERIR-DOMINIO-DO-SITE.com.br";
+  }
+
+  throw new Error(
+    "NEXT_PUBLIC_SITE_URL não está definida (ou ainda aponta para um domínio fictício/localhost). " +
+      "Defina essa variável de ambiente com o domínio real do site antes de publicar em produção. " +
+      "Para gerar um build de verificação sem domínio real, rode com ALLOW_PLACEHOLDER_SITE_URL=1."
+  );
+}
+
+export const siteUrl = resolveSiteUrl();
+
+// Verdadeiro para qualquer valor que ainda seja um placeholder [INSERIR_...]
+// pendente de preenchimento pela escola. Use isto para nunca renderizar o
+// texto cru do placeholder para o público — ou esconda o bloco, ou mostre
+// uma mensagem neutra.
+export function isPlaceholder(value: string): boolean {
+  return value.trim().startsWith("[INSERIR");
+}
+
+const instagramHandle = "@escola_transicao";
 
 export const siteConfig = {
   name: "Escola Transição",
@@ -16,9 +64,21 @@ export const siteConfig = {
   whatsappDefaultMessage:
     "Olá! Vim pelo site da Escola Transição e gostaria de conhecer melhor a escola.",
   phone: "(41) 3586-0107",
+  phoneE164: "+554135860107", // formato internacional, para tel: e JSON-LD
   email: "[INSERIR_EMAIL]",
-  instagram: "@escola_transicao",
+  instagram: instagramHandle,
+  instagramUrl: `https://www.instagram.com/${instagramHandle.replace(/^@/, "")}/`,
   address: "R. João Zarpelon, 124 - Costeira, São José dos Pinhais - PR, 83015-210",
+  // Campos estruturados do mesmo endereço acima, para JSON-LD (schema.org PostalAddress).
+  addressStructured: {
+    streetAddress: "R. João Zarpelon, 124 - Costeira",
+    addressLocality: "São José dos Pinhais",
+    addressRegion: "PR",
+    postalCode: "83015-210",
+    addressCountry: "BR",
+  },
+  city: "São José dos Pinhais",
+  neighborhood: "Costeira",
   hours: "[INSERIR_HORARIO]", // confirmado apenas: fecha às 18h. Falta horário de abertura e dias da semana.
   googleMapsLink: "https://www.google.com/maps/search/?api=1&query=R.+Jo%C3%A3o+Zarpelon%2C+124+-+Costeira%2C+S%C3%A3o+Jos%C3%A9+dos+Pinhais+-+PR%2C+83015-210",
   googleMapsEmbedSrc: "[INSERIR_IFRAME_GOOGLE_MAPS]",

@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import { Home } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { NeuralBackground } from "@/components/ui/NeuralBackground";
+
+export const metadata: Metadata = {
+  title: "Página não encontrada",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

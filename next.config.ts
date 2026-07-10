@@ -5,23 +5,31 @@ import type { NextConfig } from "next";
 // added to script-src outside of production.
 const isDev = process.env.NODE_ENV !== "production";
 
+// next/font self-hospeda Quicksand/Nunito no build (sem requisição a
+// fonts.googleapis.com/fonts.gstatic.com em runtime), então essas origens
+// não entram na CSP. style-src ainda precisa de 'unsafe-inline' porque
+// alguns componentes usam a prop `style` (ex: gradientes de PlaceholderImage)
+// — removê-lo exigiria migrar esses estilos para CSS/nonce, fora do escopo
+// desta revisão de segurança.
 const contentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""};
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src 'self' https://fonts.gstatic.com;
-  img-src 'self' data: https:;
+  style-src 'self' 'unsafe-inline';
+  font-src 'self';
+  img-src 'self' data:;
   frame-src https://www.google.com;
+  object-src 'none';
   connect-src 'self'${isDev ? " ws:" : ""};
   base-uri 'self';
   form-action 'self';
-  frame-ancestors 'self';
+  frame-ancestors 'none';
 `
   .replace(/\n/g, " ")
   .trim();
 
 const securityHeaders = [
-  { key: "X-Frame-Options", value: "SAMEORIGIN" },
+  // O site nunca precisa ser incorporado em outro site via <iframe>.
+  { key: "X-Frame-Options", value: "DENY" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   {
@@ -29,6 +37,10 @@ const securityHeaders = [
     value: "geolocation=(), camera=(), microphone=(), interest-cohort=()",
   },
   { key: "Content-Security-Policy", value: contentSecurityPolicy },
+  // HSTS só em produção com HTTPS. Sem `includeSubDomains`/`preload` até
+  // confirmar que TODO subdomínio real da escola também serve HTTPS —
+  // adicionar isso cedo demais pode quebrar um subdomínio esquecido.
+  ...(isDev ? [] : [{ key: "Strict-Transport-Security", value: "max-age=31536000" }]),
 ];
 
 const nextConfig: NextConfig = {

@@ -1,15 +1,17 @@
-import type { Metadata } from "next";
 import { HeroPage } from "@/components/ui/HeroPage";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { PlaceholderImage } from "@/components/ui/PlaceholderImage";
 import { IconCard } from "@/components/ui/IconCard";
 import { FadeIn, StaggerGroup, StaggerItem } from "@/components/ui/FadeIn";
 import { sobreContent } from "@/data/sobre";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Sobre a Escola Transição | Nossa História e Essência",
-  description: "Conheça a história, missão, valores e essência da Escola Transição.",
-};
+export const metadata = pageMetadata({
+  title: "Sobre Nossa História e Essência",
+  description:
+    "Conheça a história, missão, valores e essência da Escola Transição, escola de educação infantil no bairro Costeira, em São José dos Pinhais.",
+  path: "/sobre",
+});
 
 export default function SobrePage() {
   const { hero, quemSomos, essencia, mvv, acreditamos, cuidar } = sobreContent;

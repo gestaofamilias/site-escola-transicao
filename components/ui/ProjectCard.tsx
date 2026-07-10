@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { StaggerItem } from "./FadeIn";
 import { Card } from "./Card";
 import { PlaceholderImage } from "./PlaceholderImage";
@@ -8,21 +9,34 @@ type ProjectCardProps = {
   title: string;
   description: string;
   image?: string;
+  photo?: string;
   className?: string;
 };
 
-export function ProjectCard({ icon: Icon, title, description, image, className = "" }: ProjectCardProps) {
+export function ProjectCard({ icon: Icon, title, description, image, photo, className = "" }: ProjectCardProps) {
   return (
     <StaggerItem className={className}>
       <Card className="group flex h-full flex-col overflow-hidden !p-0">
-        {image && (
+        {(photo || image) && (
           <div className="overflow-hidden p-3 pb-0">
-            <PlaceholderImage
-              label={image}
-              tone="green"
-              aspect="aspect-[16/10]"
-              className="transition-transform duration-500 ease-out group-hover:scale-105"
-            />
+            {photo ? (
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-3xl">
+                <Image
+                  src={photo}
+                  alt={title}
+                  fill
+                  sizes="(min-width: 1024px) 380px, 90vw"
+                  className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+            ) : (
+              <PlaceholderImage
+                label={image!}
+                tone="green"
+                aspect="aspect-[16/10]"
+                className="transition-transform duration-500 ease-out group-hover:scale-105"
+              />
+            )}
           </div>
         )}
         <div className="flex flex-1 flex-col p-6">

@@ -25,6 +25,7 @@ export function FilterableGallery({ images, filters }: FilterableGalleryProps) {
             key={filter}
             type="button"
             onClick={() => setActive(filter)}
+            aria-pressed={active === filter}
             className={`focus-ring rounded-full px-4 py-2 text-sm font-semibold transition-colors duration-200 ${
               active === filter
                 ? "bg-brand-blue text-white shadow-sm"
@@ -35,6 +36,10 @@ export function FilterableGallery({ images, filters }: FilterableGalleryProps) {
           </button>
         ))}
       </div>
+
+      <p className="sr-only" role="status" aria-live="polite">
+        {`Mostrando ${filtered.length} ${filtered.length === 1 ? "foto" : "fotos"} em ${active}.`}
+      </p>
 
       <div className="mt-10">
         <ImageGrid
