@@ -15,6 +15,13 @@ function resolveSiteUrl(): string {
     return rawSiteUrl.replace(/\/$/, "");
   }
 
+  // Deploys na Vercel (preview ou produção sem domínio próprio ainda
+  // configurado) recebem automaticamente essa variável com uma URL real e
+  // funcional — não é um domínio fictício, então é um fallback legítimo.
+  if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+  }
+
   // Este módulo é importado por Client Components (Header, Footer,
   // ContactForm...), então também é avaliado no bundle do navegador. Lá,
   // variáveis sem prefixo NEXT_PUBLIC_ (como ALLOW_PLACEHOLDER_SITE_URL)
